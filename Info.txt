@@ -1,0 +1,14 @@
+Group 10
+Comp VFS (CVFS)
+Project name: Bayagi Dogan
+
+Group Members:
+YANG Xikun
+YANG Jinkun
+Arda EREN
+REN Yixiao
+
+-- Bayagi Dogan is a Turkish word, Bayağı doğan, means the Peregrine falcon.
+-- We hope our project will be perfect as a bayağı doğan, and as cool as its name.
+
+Project starts from Oct 2024. 
