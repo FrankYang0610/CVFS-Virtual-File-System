@@ -163,7 +163,7 @@ public final class FileSystem {
      * Get all files of a directory.
      * @param directory the directory.
      * @return all files of that directory, in a {@code TreeMap} form.
-     * @throws FileNotExistsException if the directory has been deleted or there is no such file in the directory with the given name.
+     * @throws FileNotExistsException if the directory has been deleted.
      */
     public TreeMap<String, File> getAllFiles(Directory directory) throws FileNotExistsException {
         checkExistence(directory);
