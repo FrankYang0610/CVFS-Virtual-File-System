@@ -80,7 +80,7 @@ public final class Console {
                 Welcome to CVFS - COMP Virtual File System, Project Bayagi Dogan ('Peregrine Falcon')\s
                 Group members:\s
                     Yang Xikun Frank (overall design and coding)\s
-                    Yang Jinkun Jim (model improving)\s
+                    Yang Jinkun Jim (model checking and improving)\s
                     Ren Yixiao Zachary (test engineer)\s
                     Arda Eren (report and user manual)\s
                 Version: 1.0, Build Nov 13, 2024\n
