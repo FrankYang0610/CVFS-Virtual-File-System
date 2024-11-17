@@ -5,7 +5,7 @@ import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeVDiskException;
 
-import java.io.Serial;
+// import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * This class represents the virtual disk, including the disk management program.
  */
 public final class VDisk implements Serializable {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     private final long diskSize;

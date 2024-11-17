@@ -3,14 +3,14 @@ package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.compositecriter
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
-import java.io.Serial;
+// import java.io.Serial;
 
 /**
  * <h3>The {@code NewNegation} Criterion Class</h3>
  * This class represents the {@code newNegation} composite criterion, see {@code [REQ11]}.
  */
 public final class NegationCriterion implements Criterion {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
     
     private final String name;

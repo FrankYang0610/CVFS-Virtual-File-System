@@ -3,14 +3,14 @@ package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.compositecriter
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
-import java.io.Serial;
+// import java.io.Serial;
 
 /**
  * <h3>The {@code LogicAndCriterion} Criterion Class</h3>
  * This class represents the {@code newBinary} composite criterion with {@code logicOp == &&}, see {@code [REQ11]}.
  */
 public final class LogicAndCriterion implements Criterion {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     private final String name;

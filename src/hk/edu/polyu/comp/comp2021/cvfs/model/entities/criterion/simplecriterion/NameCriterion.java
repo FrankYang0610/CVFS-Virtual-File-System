@@ -3,14 +3,14 @@ package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
-import java.io.Serial;
+// import java.io.Serial;
 
 /**
  * <h3>The {@code NameCriterion} Criterion Class</h3>
  * This class represents the simple criterion with {@code attrName == name}, see {@code [REQ9]}.
  */
 public final class NameCriterion implements Criterion {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     private final String name;

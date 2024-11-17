@@ -33,28 +33,30 @@ public final class CriterionFactory {
         try {
             checkCriName(criName);
 
-            return switch (attrType) {
-                case "name" -> {
+            switch (attrType) {
+                case "name": {
                     if (!op.equals("contains")) {
                         throw new InvalidCriterionParameterException(op);
                     }
                     if (val.length() <= 2 || !val.startsWith("\"") || !val.endsWith("\"")) {
                         throw new InvalidCriterionParameterException(val);
                     }
-                    yield new NameCriterion(criName, val.substring(1, val.length() - 1));
+                    return new NameCriterion(criName, val.substring(1, val.length() - 1));
                 }
-                case "type" -> {
+                case "type": {
                     if (!op.equals("equals")) {
                         throw new InvalidCriterionParameterException(op);
                     }
                     if (val.length() <= 2 || !val.startsWith("\"") || !val.endsWith("\"")) {
                         throw new InvalidCriterionParameterException(val);
                     }
-                    yield new TypeCriterion(criName, val.substring(1, val.length() - 1));
+                    return new TypeCriterion(criName, val.substring(1, val.length() - 1));
                 }
-                case "size" -> new SizeCriterion(criName, op, Long.parseLong(val)); // The validity of op will be judged in the SizeCriterion constructor.
-                default -> throw new InvalidCriterionParameterException("Unknown attribute type: " + attrType);
-            };
+                case "size":
+                    return new SizeCriterion(criName, op, Long.parseLong(val)); // The validity of op will be judged in the SizeCriterion constructor.
+                default:
+                    throw new InvalidCriterionParameterException("Unknown attribute type: " + attrType);
+            }
         } catch (NumberFormatException e) {
             throw new InvalidCriterionParameterException("An integer expected.");
         }
@@ -89,14 +91,14 @@ public final class CriterionFactory {
      */
     public Criterion createBinaryCriterion(String criName, Criterion cri3, String logicOp, Criterion cri4) throws InvalidCriterionParameterException {
         checkCriName(criName);
-        return switch (logicOp) {
+        switch (logicOp) {
             case "&&":
-                yield new LogicAndCriterion(criName, cri3, cri4);
+                return new LogicAndCriterion(criName, cri3, cri4);
             case "||":
-                yield new LogicOrCriterion(criName, cri3, cri4);
+                return new LogicOrCriterion(criName, cri3, cri4);
             default:
                 throw new InvalidCriterionParameterException(logicOp);
-        };
+        }
     }
 
     /**

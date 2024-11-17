@@ -30,10 +30,15 @@ public enum OperationType {
      * @return the inverse operation type.
      */
     public OperationType getInverseType() {
-        return switch (this) {
-            case REGULAR -> UNDO;
-            case UNDO -> REDO;
-            case REDO -> UNDO;
-        };
+        switch (this) {
+            case REGULAR:
+                return UNDO;
+            case UNDO:
+                return REDO;
+            case REDO:
+                return UNDO;
+            default:
+                return null;
+        }
     }
 }

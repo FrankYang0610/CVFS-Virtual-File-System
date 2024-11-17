@@ -4,7 +4,7 @@ import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.InvalidCriterionParameterException;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
-import java.io.Serial;
+// import java.io.Serial;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * This class represents the simple criterion with {@code attrName == size}, see {@code [REQ9]}.
  */
 public final class SizeCriterion implements Criterion {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     private static final List<String> validOperators = Arrays.asList(">", "<", ">=", "<=", "==", "!=");
@@ -50,15 +50,15 @@ public final class SizeCriterion implements Criterion {
 
     @Override
     public boolean check(File file) {
-        return switch (op) {
-            case ">" -> file.getSize() > size;
-            case "<" -> file.getSize() < size;
-            case ">=" -> file.getSize() >= size;
-            case "<=" -> file.getSize() <= size;
-            case "==" -> file.getSize() == size;
-            case "!=" -> file.getSize() != size;
-            default -> false;
-        };
+        switch (op) {
+            case ">": return file.getSize() > size;
+            case "<": return file.getSize() < size;
+            case ">=": return file.getSize() >= size;
+            case "<=": return file.getSize() <= size;
+            case "==": return file.getSize() == size;
+            case "!=": return file.getSize() != size;
+            default: return false;
+        }
     }
 
     @Override

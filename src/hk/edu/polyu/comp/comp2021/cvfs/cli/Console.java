@@ -76,15 +76,14 @@ public final class Console {
      * The content should be edited well.
      */
     private void printFirstMessage() {
-        System.out.println("""
-                Welcome to CVFS - COMP Virtual File System, Project Bayagi Dogan ('Peregrine Falcon')\s
-                Group members:\s
-                    Yang Xikun Frank (overall design and coding)\s
-                    Yang Jinkun Jim (model checking and improving)\s
-                    Ren Yixiao Zachary (test engineer)\s
-                    Arda Eren (report and user manual)\s
-                Version: 1.0, Build Nov 13, 2024\n
-                Make a difference from today! Protect planet's most extraordinary places – mangroves, forests, wetlands and coasts – save the home to thousands of unique birds.""");
+        System.out.println("Welcome to CVFS - COMP Virtual File System, Project Bayagi Dogan ('Peregrine Falcon')\n" +
+                        "Group members:\n" +
+                        "\tYang Xikun Frank (overall design and coding)\n" +
+                        "\tYang Jinkun Jim (model checking and improving)\n" +
+                        "\tRen Yixiao Zachary (test engineer)\n" +
+                        "\tArda Eren (report and user manual)\n" +
+                        "Version: 1.0, Build Nov 13, 2024\n\n" +
+                        "Make a difference from today! Protect planet's most extraordinary places – mangroves, forests, wetlands and coasts – save the home to thousands of unique birds.");
     }
 
     /**

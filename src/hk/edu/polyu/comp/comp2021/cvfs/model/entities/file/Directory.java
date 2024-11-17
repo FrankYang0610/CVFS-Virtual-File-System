@@ -2,7 +2,7 @@ package hk.edu.polyu.comp.comp2021.cvfs.model.entities.file;
 
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
 
-import java.io.Serial;
+// import java.io.Serial;
 import java.util.TreeMap;
 
 /**
@@ -10,7 +10,7 @@ import java.util.TreeMap;
  * This class represents the directories.
  */
 public final class Directory implements File {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     /**

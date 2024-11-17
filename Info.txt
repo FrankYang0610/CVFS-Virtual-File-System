@@ -1,14 +1,15 @@
 Group 10
-Comp VFS (CVFS)
+COMP Virtual File System (CVFS)
 Project name: Bayagi Dogan
 
 Group Members:
-YANG Xikun
-YANG Jinkun
-Arda EREN
-REN Yixiao
+Yang Xikun Frank
+Yang Jinkun Jim
+Arda Eren
+Ren Yixiao Zachary
 
--- Bayagi Dogan is a Turkish word, Bayağı doğan, means the Peregrine falcon.
--- We hope our project will be perfect as a bayağı doğan, and as cool as its name.
+Bayagi Dogan is a Turkish word, Bayağı doğan, means the Peregrine falcon.
+We hope our project will be perfect as a bayağı doğan, and as cool as its name.
 
-Project starts from Oct 2024. 
+This project is part of the course COMP2021 Object-Oriented Programming at the Hong Kong Polytechnic University.
+Project starts from Oct 2024.

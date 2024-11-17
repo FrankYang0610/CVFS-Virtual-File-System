@@ -26,61 +26,61 @@ public final class OperationFactory {
             throw new InvalidCommandException("Empty command.");
         }
 
-        return switch (command[0]) {
+        switch (command[0]) {
             case "newDisk": // [REQ1]
-                yield new NewDisk(fs, operationRecord, command);
+                return new NewDisk(fs, operationRecord, command);
             case "newDoc": // [REQ2]
-                yield new NewDoc(fs, command);
+                return new NewDoc(fs, command);
             case "newDir": // [REQ3]
-                yield new NewDir(fs, command);
+                return new NewDir(fs, command);
             case "view":
-                yield new ViewContent(fs, command);
+                return new ViewContent(fs, command);
             case "delete": // [REQ4]
-                yield new Remove(fs, command);
+                return new Remove(fs, command);
             case "rename": // [REQ5]
-                yield new Rename(fs, command);
+                return new Rename(fs, command);
             case "modify":
-                yield new ModifyContent(fs, command);
+                return new ModifyContent(fs, command);
             case "changeDir": // [REQ6]
-                yield new ChangeDir(fs, command);
+                return new ChangeDir(fs, command);
             case "list": // [REQ7]
-                yield new List(fs, command);
+                return new List(fs, command);
             case "rList": // [REQ8]
-                yield new RList(fs, command);
+                return new RList(fs, command);
             case "newSimpleCri": // [REQ9]
-                yield new NewSimpleCri(fs, command);
+                return new NewSimpleCri(fs, command);
             // case "isDocument": // [REQ10]
             case "newNegation": // [REQ11]
-                yield new NewNegation(fs, command);
+                return new NewNegation(fs, command);
             case "newBinaryCri": // [REQ11]
-                yield new NewBinaryCri(fs, command);
+                return new NewBinaryCri(fs, command);
             case "deleteCri":
-                yield new RemoveCri(fs, command);
+                return new RemoveCri(fs, command);
             case "printAllCriteria": // [REQ12]
-                yield new PrintAllCriteria(fs, command);
+                return new PrintAllCriteria(fs, command);
             case "search": // [REQ13]
-                yield new Search(fs, command);
+                return new Search(fs, command);
             case "rSearch": // [REQ14]
-                yield new RSearch(fs, command);
+                return new RSearch(fs, command);
             case "save": // [REQ15]
-                yield new Save(fs, command);
+                return new Save(fs, command);
             case "load": // [REQ16]
-                yield new Load(fs, operationRecord, command);
+                return new Load(fs, operationRecord, command);
             case "saveCri": // [BON1]
-                yield new SaveCri(fs, command);
+                return new SaveCri(fs, command);
             case "loadCri": // [BON1]
-                yield new LoadCri(fs, operationRecord, command);
+                return new LoadCri(fs, operationRecord, command);
             case "undo": // [BON2]
-                yield operationRecord.popForUndo().getUndoOperation();
+                return operationRecord.popForUndo().getUndoOperation();
             case "redo": // [BON2]
-                yield operationRecord.popForRedo().getUndoOperation();
+                return operationRecord.popForRedo().getUndoOperation();
             // case "reset": // obsoleted, since ejectVDisk() is no longer supported.
-            //     yield new Reset(fs, operationRecord, command);
+            //     return new Reset(fs, operationRecord, command);
             case "quit": // [REQ17]
                 operationRecord.clearFileRelated();
-                yield new Quit(fs, operationRecord, command);
+                return new Quit(fs, operationRecord, command);
             default:
                 throw new InvalidCommandException("Unknown command: " + command[0] + ".");
-        };
+        }
     }
 }

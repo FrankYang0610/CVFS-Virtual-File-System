@@ -4,14 +4,14 @@ import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Document;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
-import java.io.Serial;
+// import java.io.Serial;
 
 /**
  * <h3>The {@code TypeCriterion} Criterion Class</h3>
  * This class represents the simple criterion with {@code attrName == type}, see {@code [REQ9]}.
  */
 public final class TypeCriterion implements Criterion {
-    @Serial
+    // @Serial
     private static final long serialVersionUID = 1L;
 
     private final String name;
