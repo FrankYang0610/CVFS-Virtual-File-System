@@ -5,15 +5,15 @@ import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion.
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Directory;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.InvalidCriterionParameterException;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class CriterionAllTest {
+public class CriterionAllTest {
     CriterionFactory criterionFactory = new CriterionFactory();
 
     @Test
-    void testGetNameCriterion() {
+    public void testGetNameCriterion() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("aa", "name", "contains", "\"Main\"");
             assertEquals("aa", criterion.getName());
@@ -31,7 +31,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidNameCriterion1() {
+    public void testInvalidNameCriterion1() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("aa", "name", "contains", "Main");
             assertEquals("aa: name contains \"Main\"", criterion.toString());
@@ -39,7 +39,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidNameCriterion2() {
+    public void testInvalidNameCriterion2() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("aa", "name", "contain", "Main");
             assertEquals("aa: name contains \"Main\"", criterion.toString());
@@ -47,7 +47,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetTypeCriterion() {
+    public void testGetTypeCriterion() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("bb", "type", "equals", "\"java\"");
             assertEquals("bb", criterion.getName());
@@ -65,21 +65,21 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidTypeCriterion1() {
+    public void testInvalidTypeCriterion1() {
         try {
             assertEquals("bb: type equals java", criterionFactory.createSimpleCriterion("bb", "type", "equals", "java").toString());
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
     @Test
-    void testInvalidTypeCriterion2() {
+    public void testInvalidTypeCriterion2() {
         try {
             assertEquals("bb: type equals java", criterionFactory.createSimpleCriterion("bb", "type", "equal", "java").toString());
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
     @Test
-    void testGetSizeCriterion1() {
+    public void testGetSizeCriterion1() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", ">", "60");
             assertEquals("cc", criterion.getName());
@@ -97,7 +97,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetSizeCriterion2() {
+    public void testGetSizeCriterion2() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", "<", "60");
             assertEquals("cc", criterion.getName());
@@ -115,7 +115,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetSizeCriterion3() {
+    public void testGetSizeCriterion3() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", ">=", "60");
             assertEquals("cc", criterion.getName());
@@ -133,7 +133,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetSizeCriterion4() {
+    public void testGetSizeCriterion4() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", "<=", "60");
             assertEquals("cc", criterion.getName());
@@ -151,7 +151,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetSizeCriterion5() {
+    public void testGetSizeCriterion5() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", "==", "60");
             assertEquals("cc", criterion.getName());
@@ -169,7 +169,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetSizeCriterion6() {
+    public void testGetSizeCriterion6() {
         try {
             Criterion criterion = criterionFactory.createSimpleCriterion("cc", "size", "!=", "60");
             assertEquals("cc", criterion.getName());
@@ -187,21 +187,21 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidSizeCriterion1() {
+    public void testInvalidSizeCriterion1() {
         try {
             assertEquals("cc: size > 60", criterionFactory.createSimpleCriterion("cc", "size", "<>", "60").toString());
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
     @Test
-    void testInvalidSizeCriterion2() {
+    public void testInvalidSizeCriterion2() {
         try {
             assertEquals("cc: size > 60", criterionFactory.createSimpleCriterion("cc", "size", "<>", "not_a_number").toString());
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
     @Test
-    void IsDocumentTest() {
+    public void IsDocumentTest() {
         Criterion criterion = new IsDocument();
         assertEquals("IsDocument", criterion.getName());
         assertEquals("IsDocument", criterion.toString());
@@ -219,7 +219,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetNegationCriterion() {
+    public void testGetNegationCriterion() {
         try {
             SizeCriterion sizeCriterion = new SizeCriterion("cc", ">", 60);
             Criterion criterion = criterionFactory.createNegationCriterion("dd", sizeCriterion);
@@ -235,7 +235,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidNegationCriterion1() {
+    public void testInvalidNegationCriterion1() {
         try {
             SizeCriterion sizeCriterion = new SizeCriterion("cc", "<>", 60);
             Criterion criterion = criterionFactory.createNegationCriterion("dd", sizeCriterion);
@@ -244,7 +244,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidNegationCriterion2() {
+    public void testInvalidNegationCriterion2() {
         try {
             SizeCriterion sizeCriterion = new SizeCriterion("cc", ">", 60);
             Criterion criterion = criterionFactory.createNegationCriterion("dd_", sizeCriterion);
@@ -253,7 +253,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetBinaryAndCriterion() {
+    public void testGetBinaryAndCriterion() {
         try {
             SizeCriterion sizeCriterion1 = new SizeCriterion("cc", ">", 60);
             SizeCriterion sizeCriterion2 = new SizeCriterion("gg", ">", 70);
@@ -273,7 +273,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testGetBinaryOrCriterion() {
+    public void testGetBinaryOrCriterion() {
         try {
             SizeCriterion sizeCriterion1 = new SizeCriterion("cc", ">", 60);
             SizeCriterion sizeCriterion2 = new SizeCriterion("gg", ">", 70);
@@ -293,7 +293,7 @@ class CriterionAllTest {
     }
 
     @Test
-    void testInvalidBinaryCriterion() {
+    public void testInvalidBinaryCriterion() {
         try {
             SizeCriterion sizeCriterion1 = new SizeCriterion("cc", ">", 60);
             SizeCriterion sizeCriterion2 = new SizeCriterion("gg", ">", 70);

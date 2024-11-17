@@ -6,13 +6,13 @@ import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Directory;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Document;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.vdisk.VDisk;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.*;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class FileSystemTest {
+public class FileSystemTest {
     @Test
-    void testGetRootDirectory() {
+    public void testGetRootDirectory() {
         try {
             FileSystem fs = new FileSystem();
             assertNull(fs.getRootDirectory());
@@ -20,7 +20,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testGetWorkingDirectory1() {
+    public void testGetWorkingDirectory1() {
         try {
             FileSystem fs = new FileSystem();
             assertNull(fs.getWorkingDirectory());
@@ -28,7 +28,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testGetWorkingDirectory2() {
+    public void testGetWorkingDirectory2() {
         try {
             FileSystem fs = new FileSystem();
             assertNotNull(fs.getWorkingDirectory());
@@ -36,13 +36,13 @@ class FileSystemTest {
     }
 
     @Test
-    void testGetWorkingDirectoryPathSafely() {
+    public void testGetWorkingDirectoryPathSafely() {
         FileSystem fs = new FileSystem();
         assertEquals("", fs.getWorkingDirectoryPathSafely());
     }
 
     @Test
-    void testMountVDisk() {
+    public void testMountVDisk() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -52,7 +52,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testSetWorkingDirectory() {
+    public void testSetWorkingDirectory() {
         try {
             FileSystem fs = new FileSystem();
             fs.setNewWorkingDirectory(new Directory(true));
@@ -60,7 +60,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testGetParent() {
+    public void testGetParent() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -69,7 +69,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testGetAllFiles() {
+    public void testGetAllFiles() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -79,7 +79,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testFindFile() {
+    public void testFindFile() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -89,7 +89,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testAddAndFindFile1() {
+    public void testAddAndFindFile1() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(5)); // no enough space
@@ -100,7 +100,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testAddAndFindFile2() {
+    public void testAddAndFindFile2() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -111,7 +111,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testAddAndFindFile3() {
+    public void testAddAndFindFile3() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -123,7 +123,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testAddAndFindAndRemoveFile() {
+    public void testAddAndFindAndRemoveFile() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -136,7 +136,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testAddAndRenameFile() {
+    public void testAddAndRenameFile() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -150,7 +150,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testProcessDocument() {
+    public void testProcessDocument() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -167,7 +167,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testProcessInappropriateDocument() {
+    public void testProcessInappropriateDocument() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -180,14 +180,14 @@ class FileSystemTest {
     }
 
     @Test
-    void testReleaseResource() {
+    public void testReleaseResource() {
         FileSystem fs = new FileSystem();
         fs.releaseResource();
         assertTrue(fs.getAllCriteria().isEmpty());
     }
 
     @Test
-    void testCriterion1() {
+    public void testCriterion1() {
         try {
             FileSystem fs = new FileSystem();
             SizeCriterion sizeCriterion = new SizeCriterion("cc", ">", 60);
@@ -202,7 +202,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testCriterion2() {
+    public void testCriterion2() {
         try {
             FileSystem fs = new FileSystem();
             assertNull(fs.findCriterion("aa"));
@@ -210,7 +210,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testCriterion3() {
+    public void testCriterion3() {
         try {
             FileSystem fs = new FileSystem();
             fs.removeCriterion(new IsDocument()); // error here
@@ -219,7 +219,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testLoadSaveVDisk() {
+    public void testLoadSaveVDisk() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -230,7 +230,7 @@ class FileSystemTest {
     }
 
     @Test
-    void testLoadSaveCriteria() {
+    public void testLoadSaveCriteria() {
         try {
             FileSystem fs = new FileSystem();
             fs.saveAllCriteria("UnitTestCriteria.ser");

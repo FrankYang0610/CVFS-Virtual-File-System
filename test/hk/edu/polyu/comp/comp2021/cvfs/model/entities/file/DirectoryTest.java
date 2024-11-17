@@ -1,12 +1,11 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.file;
 
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class DirectoryTest {
+public class DirectoryTest {
     Directory directory;
     {
         try {
@@ -24,59 +23,59 @@ class DirectoryTest {
 
 
     @Test
-    void testGetName() {
+    public void testGetName() {
         assertEquals("Main", directory.getName());
     }
 
     @Test
-    void testGetFullName() {
+    public void testGetFullName() {
         assertEquals("Main", directory.getFullname());
     }
 
     @Test
-    void testGetSize() {
+    public void testGetSize() {
         assertEquals(40 + 40 + 21 * 2, directory.getSize());
     }
 
     @Test
-    void testGetPath() {
+    public void testGetPath() {
         assertEquals("$:Main", directory.getPath());
     }
 
     @Test
-    void testParent() {
+    public void testParent() {
         assertTrue(((Directory)(directory.__INTERNAL__getParent())).isRootDirectory());
     }
 
     @Test
-    void testRoot() {
+    public void testRoot() {
         assertEquals("$", directory.__INTERNAL__getRoot().getName());
     }
 
     @Test
-    void testSetName() {
+    public void testSetName() {
         directory.__INTERNAL__setName("Main2");
         assertEquals("Main2", directory.getName());
     }
 
     @Test
-    void testExistsName() {
+    public void testExistsName() {
         assertTrue(directory.__INTERNAL__existsName("Main"));
     }
 
     @Test
-    void testFindFile() {
+    public void testFindFile() {
         assertNotNull(directory.__INTERNAL__findFile("Main"));
     }
 
     @Test
-    void testDeleteFile() {
+    public void testDeleteFile() {
         directory.__INTERNAL__delete(document);
         assertNull(directory.__INTERNAL__findFile("Main"));
     }
 
     @Test
-    void testInvalidDocument() {
+    public void testInvalidDocument() {
         Directory anotherDirectory = null;
         try {
             anotherDirectory = new Directory("invalid-name", new Directory(true));

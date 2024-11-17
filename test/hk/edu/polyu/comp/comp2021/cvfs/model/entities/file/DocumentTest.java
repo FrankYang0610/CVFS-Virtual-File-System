@@ -1,12 +1,11 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.file;
 
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class DocumentTest {
+public class DocumentTest {
     Document document;
     {
         try {
@@ -14,61 +13,60 @@ class DocumentTest {
         } catch (CannotInitializeFileException ignored) {}
     }
 
-
     @Test
-    void testGetName() {
+    public void testGetName() {
         assertEquals("Main", document.getName());
     }
 
     @Test
-    void testGetFullName() {
+    public void testGetFullName() {
         assertEquals("Main.java", document.getFullname());
     }
 
     @Test
-    void testGetSize() {
+    public void testGetSize() {
         assertTrue(document.getSize() > 0);
     }
 
     @Test
-    void testGetType() {
+    public void testGetType() {
         assertEquals("java", document.getType());
     }
 
     @Test
-    void testGetContent() {
+    public void testGetContent() {
         assertEquals("public class Main { }", document.getContent());
     }
 
     @Test
-    void testGetPath() {
+    public void testGetPath() {
         assertEquals("$:Main.java", document.getPath());
     }
 
     @Test
-    void testParent() {
+    public void testParent() {
         assertTrue(((Directory)(document.__INTERNAL__getParent())).isRootDirectory());
     }
 
     @Test
-    void testRoot() {
+    public void testRoot() {
         assertEquals("$", document.__INTERNAL__getRoot().getName());
     }
 
     @Test
-    void testSetName() {
+    public void testSetName() {
         document.__INTERNAL__setName("Main2");
         assertEquals("Main2", document.getName());
     }
 
     @Test
-    void testSetContent() {
+    public void testSetContent() {
         document.__INTERNAL__setContent("public class Main { private int a; }");
         assertEquals("public class Main { private int a; }", document.getContent());
     }
 
     @Test
-    void testInvalidDocument() {
+    public void testInvalidDocument() {
         Document anotherDocument = null;
         try {
             anotherDocument = new Document("invalid-name", "java", "...", new Directory(true));
