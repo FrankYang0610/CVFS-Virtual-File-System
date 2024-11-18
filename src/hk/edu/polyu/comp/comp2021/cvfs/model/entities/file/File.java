@@ -1,10 +1,9 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.file;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.DuplicatedFilenameException;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * <h3>The {@code File} Interface</h3>

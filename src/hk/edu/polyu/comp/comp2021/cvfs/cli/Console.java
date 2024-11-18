@@ -79,7 +79,7 @@ public final class Console {
         System.out.println("Welcome to CVFS - COMP Virtual File System, Project Bayagi Dogan ('Peregrine Falcon')\n" +
                         "Group members:\n" +
                         "\tYang Xikun Frank (overall design and coding)\n" +
-                        "\tYang Jinkun Jim (model checking and improving)\n" +
+                        "\tYang Jinkun Jim (model validating and improving)\n" +
                         "\tRen Yixiao Zachary (test engineer)\n" +
                         "\tArda Eren (report and user manual)\n" +
                         "Version: 1.0, Build Nov 13, 2024\n\n" +

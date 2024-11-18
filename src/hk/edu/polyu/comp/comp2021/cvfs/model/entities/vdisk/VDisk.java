@@ -1,8 +1,7 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.vdisk;
 
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Directory;
-import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.ModelInternalUse;
-import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeVDiskException;
 
 // import java.io.Serial;

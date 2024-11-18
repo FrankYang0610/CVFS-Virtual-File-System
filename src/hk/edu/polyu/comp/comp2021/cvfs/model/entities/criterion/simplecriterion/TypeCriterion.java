@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Document;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
@@ -48,12 +49,14 @@ public final class TypeCriterion implements Criterion {
     }
 
     @Override
-    public void increaseReferenceCount() {
+    @ModelInternalUse
+    public void __INTERNAL__increaseReferenceCount() {
         referenceCount++;
     }
 
     @Override
-    public void decreaseReferenceCount() {
+    @ModelInternalUse
+    public void __INTERNAL__decreaseReferenceCount() {
         referenceCount--;
     }
 

@@ -340,7 +340,7 @@ public final class FileSystem {
         }
 
         for (Criterion dependency : criterion.getDependencies()) {
-            dependency.increaseReferenceCount();
+            dependency.__INTERNAL__increaseReferenceCount();
         }
 
         criteria.put(name, criterion);
@@ -384,7 +384,7 @@ public final class FileSystem {
         }
 
         for (Criterion dependency : criterion.getDependencies()) {
-            dependency.decreaseReferenceCount();
+            dependency.__INTERNAL__decreaseReferenceCount();
         }
 
         criteria.remove(criterion.getName());

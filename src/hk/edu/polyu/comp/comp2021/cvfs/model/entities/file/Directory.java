@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.file;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.CannotInitializeFileException;
 
 // import java.io.Serial;

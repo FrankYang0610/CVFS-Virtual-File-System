@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
 
 import java.io.Serializable;
@@ -33,12 +34,14 @@ public interface Criterion extends Serializable {
     /**
      * Increase the reference count (by 1).
      */
-    public void increaseReferenceCount();
+    @ModelInternalUse
+    public void __INTERNAL__increaseReferenceCount();
 
     /**
      * Decrease the reference count (by 1).
      */
-    public void decreaseReferenceCount();
+    @ModelInternalUse
+    public void __INTERNAL__decreaseReferenceCount();
 
     /**
      * Get the dependencies of this criterion.

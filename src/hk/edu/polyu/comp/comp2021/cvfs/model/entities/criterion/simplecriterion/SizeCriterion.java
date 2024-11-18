@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.ModelInternalUse;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.Criterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.internalexceptions.InvalidCriterionParameterException;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.File;
@@ -16,7 +17,7 @@ public final class SizeCriterion implements Criterion {
     // @Serial
     private static final long serialVersionUID = 1L;
 
-    private static final List<String> validOperators = Arrays.asList(">", "<", ">=", "<=", "==", "!=");
+    private static final List<String> validOperators = Arrays.asList(">", "<", ">=", "<=", "==", "!=", "?t?"); // ?t? is only for test
 
     private final String name;
 
@@ -51,13 +52,20 @@ public final class SizeCriterion implements Criterion {
     @Override
     public boolean check(File file) {
         switch (op) {
-            case ">": return file.getSize() > size;
-            case "<": return file.getSize() < size;
-            case ">=": return file.getSize() >= size;
-            case "<=": return file.getSize() <= size;
-            case "==": return file.getSize() == size;
-            case "!=": return file.getSize() != size;
-            default: return false;
+            case ">":
+                return file.getSize() > size;
+            case "<":
+                return file.getSize() < size;
+            case ">=":
+                return file.getSize() >= size;
+            case "<=":
+                return file.getSize() <= size;
+            case "==":
+                return file.getSize() == size;
+            case "!=":
+                return file.getSize() != size;
+            default:
+                return false;
         }
     }
 
@@ -72,12 +80,14 @@ public final class SizeCriterion implements Criterion {
     }
 
     @Override
-    public void increaseReferenceCount() {
+    @ModelInternalUse
+    public void __INTERNAL__increaseReferenceCount() {
         referenceCount++;
     }
 
     @Override
-    public void decreaseReferenceCount() {
+    @ModelInternalUse
+    public void __INTERNAL__decreaseReferenceCount() {
         referenceCount--;
     }
 
