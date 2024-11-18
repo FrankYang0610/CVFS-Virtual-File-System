@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp.comp2021.cvfs.model.filesystem;
 
+import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.compositecriterion.NegationCriterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion.IsDocument;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.criterion.simplecriterion.SizeCriterion;
 import hk.edu.polyu.comp.comp2021.cvfs.model.entities.file.Directory;
@@ -49,6 +50,20 @@ public class FileSystemTest {
             assertEquals("$", fs.getRootDirectory().getName());
             assertEquals("$", fs.getWorkingDirectory().getName());
         } catch (NoMountedDiskOrWorkingDirectoryException | CannotInitializeVDiskException | FileNotExistsException ignored) {}
+    }
+
+    @Test
+    public void testLocalFileSystemException() {
+        try {
+            throw new LocalFileSystemException("testError");
+        } catch (LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testCannotEditRootDirectoryException() {
+        try {
+            throw new CannotEditRootDirectoryException();
+        } catch (CannotEditRootDirectoryException ignored) {}
     }
 
     @Test
@@ -136,7 +151,7 @@ public class FileSystemTest {
     }
 
     @Test
-    public void testAddAndRenameFile() {
+    public void testAddAndRenameFile1() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -150,7 +165,21 @@ public class FileSystemTest {
     }
 
     @Test
-    public void testProcessDocument() {
+    public void testAddAndRenameFile2() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(1000));
+            Directory directory = new Directory("Main", fs.getWorkingDirectory());
+            fs.storeFile(directory);
+            fs.renameFile(directory, "Main");
+            assertEquals("Main2", fs.findFile(fs.getWorkingDirectory(), "Main2").getName());
+        } catch (FileNotExistsException | CannotInitializeVDiskException | NoMountedDiskOrWorkingDirectoryException |
+                 CannotInitializeFileException | WrongAddressSpaceException | VDiskOutOfSpaceException |
+                 DuplicatedFilenameException | CannotEditRootDirectoryException ignored) {}
+    }
+
+    @Test
+    public void testProcessDocument1() {
         try {
             FileSystem fs = new FileSystem();
             fs.mountVDisk(new VDisk(1000));
@@ -159,6 +188,23 @@ public class FileSystemTest {
             fs.renameFile(document, "Main2");
             fs.modifyDocument(document, "public class Main { private int a; }");
             assertEquals("public class Main { private int a; }", ((Document)(fs.findFile(fs.getWorkingDirectory(), "Main2"))).getContent());
+            fs.removeFile(document);
+            assertEquals(0, fs.getWorkingDirectory().getSize());
+        } catch (FileNotExistsException | CannotInitializeVDiskException | NoMountedDiskOrWorkingDirectoryException |
+                 CannotInitializeFileException | WrongAddressSpaceException | VDiskOutOfSpaceException |
+                 DuplicatedFilenameException | CannotEditRootDirectoryException ignored) {}
+    }
+
+    @Test
+    public void testProcessDocument2() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(90));
+            Document document = new Document("Main", "java", "public class Main { }", fs.getWorkingDirectory());
+            fs.storeFile(document);
+            fs.renameFile(document, "Main2");
+            fs.modifyDocument(document, "public class Main { private int a; private int b; }");
+            assertEquals("public class Main { private int a; private int b; }", ((Document)(fs.findFile(fs.getWorkingDirectory(), "Main2"))).getContent());
             fs.removeFile(document);
             assertEquals(0, fs.getWorkingDirectory().getSize());
         } catch (FileNotExistsException | CannotInitializeVDiskException | NoMountedDiskOrWorkingDirectoryException |
@@ -180,10 +226,56 @@ public class FileSystemTest {
     }
 
     @Test
+    public void testRenameRootDirectory() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(1000));
+            fs.renameFile(fs.getRootDirectory(), "$$");
+        } catch (CannotInitializeVDiskException | FileNotExistsException | CannotEditRootDirectoryException |
+                 WrongAddressSpaceException | NoMountedDiskOrWorkingDirectoryException | DuplicatedFilenameException ignored) {}
+    }
+
+    @Test
+    public void testDeleteRootDirectory() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(1000));
+            fs.removeFile(fs.getRootDirectory());
+        } catch (CannotInitializeVDiskException | FileNotExistsException | CannotEditRootDirectoryException | WrongAddressSpaceException | NoMountedDiskOrWorkingDirectoryException ignored) {}
+    }
+
+    @Test
+    public void checkAddressSpace() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(1000));
+            VDisk vDisk = new VDisk(1000);
+            Directory directory = new Directory("Main", vDisk.__INTERNAL__getRootDirectory());
+            fs.storeFile(directory);
+            assertEquals(3, 1 + 1); // impossible here
+        } catch (CannotInitializeVDiskException | CannotInitializeFileException | WrongAddressSpaceException |
+                 VDiskOutOfSpaceException | DuplicatedFilenameException ignored) {}
+    }
+
+    @Test
+    public void testWrongAddressSpaceException() {
+        try {
+            throw new WrongAddressSpaceException();
+        } catch (WrongAddressSpaceException ignored) {}
+    }
+
+    @Test
     public void testReleaseResource() {
         FileSystem fs = new FileSystem();
         fs.releaseResource();
         assertTrue(fs.getAllCriteria().isEmpty());
+    }
+
+    @Test
+    public void testDuplicateCriterionNameException() {
+        try {
+            throw new DuplicatedCriterionNameException("testName");
+        } catch (DuplicatedCriterionNameException ignored) {}
     }
 
     @Test
@@ -205,17 +297,49 @@ public class FileSystemTest {
     public void testCriterion2() {
         try {
             FileSystem fs = new FileSystem();
-            assertNull(fs.findCriterion("aa"));
-        } catch (CriterionNotExistsException ignored) {}
+            IsDocument isDocument = new IsDocument();
+            fs.addCriterion(isDocument);
+            assertEquals(2, fs.getAllCriteria().size()); // impossible here
+        } catch (DuplicatedCriterionNameException ignored) {}
     }
 
     @Test
     public void testCriterion3() {
         try {
             FileSystem fs = new FileSystem();
+            assertNull(fs.findCriterion("aa"));
+        } catch (CriterionNotExistsException ignored) {}
+    }
+
+    @Test
+    public void testCriterion4() {
+        try {
+            FileSystem fs = new FileSystem();
             fs.removeCriterion(new IsDocument()); // error here
             assertEquals(1, fs.getAllCriteria().size());
         } catch (CriterionNotExistsException | CannotDeleteCriterionException ignored) {}
+    }
+
+    @Test
+    public void testCriterion5() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.addCriterion(new NegationCriterion("xx", fs.getAllCriteria().get("IsDocument")));
+            assertEquals(2, fs.getAllCriteria().size());
+            fs.removeCriterion(fs.getAllCriteria().get("xx"));
+            assertEquals(1, fs.getAllCriteria().size());
+        } catch (DuplicatedCriterionNameException | CriterionNotExistsException | CannotDeleteCriterionException ignored) {}
+    }
+
+    @Test
+    public void testCriterion6() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.addCriterion(new NegationCriterion("xx", fs.getAllCriteria().get("IsDocument")));
+            assertEquals(2, fs.getAllCriteria().size());
+            fs.removeCriterion(fs.getAllCriteria().get("IsDocument"));
+            assertEquals(1, fs.getAllCriteria().size()); // impossible here
+        } catch (DuplicatedCriterionNameException | CriterionNotExistsException | CannotDeleteCriterionException ignored) {}
     }
 
     @Test
@@ -230,6 +354,34 @@ public class FileSystemTest {
     }
 
     @Test
+    public void testLoadVDisk1() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.loadVDisk("notExistsSuchVDiskFile.ser");
+            assertNotNull(fs.getRootDirectory()); // impossible here
+        } catch (NoMountedDiskOrWorkingDirectoryException | LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testSaveVDisk1() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.saveVDisk("UnitTestVDisk.ser");
+            assertNotNull(fs.getRootDirectory()); // impossible here
+        } catch (NoMountedDiskOrWorkingDirectoryException | LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testSaveVDisk2() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.mountVDisk(new VDisk(1000));
+            fs.saveVDisk("/invalid_path/<:>\\?**!<:}.ser");
+            assertNotNull(fs.getRootDirectory()); // impossible here
+        } catch (NoMountedDiskOrWorkingDirectoryException | LocalFileSystemException | CannotInitializeVDiskException ignored) {}
+    }
+
+    @Test
     public void testLoadSaveCriteria() {
         try {
             FileSystem fs = new FileSystem();
@@ -237,5 +389,30 @@ public class FileSystemTest {
             fs.loadCriteria("UnitTestCriteria.ser");
             assertEquals(1, fs.getAllCriteria().size());
         } catch (LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testLoadCriteria() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.loadCriteria("notExistsSuchCriteriaFile.ser");
+            assertEquals(1, fs.getAllCriteria().size()); // impossible here
+        } catch (LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testSaveCriteria() {
+        try {
+            FileSystem fs = new FileSystem();
+            fs.saveAllCriteria("/invalid_path/<:>\\?**!<:}.ser");
+            assertEquals(1, fs.getAllCriteria().size()); // impossible here
+        } catch (LocalFileSystemException ignored) {}
+    }
+
+    @Test
+    public void testCannotDeleteCriterionException() {
+        try {
+            throw new CannotDeleteCriterionException();
+        } catch (CannotDeleteCriterionException ignored) {}
     }
 }

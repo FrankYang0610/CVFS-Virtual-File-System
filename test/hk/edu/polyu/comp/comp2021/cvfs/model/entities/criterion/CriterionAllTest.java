@@ -19,9 +19,9 @@ public class CriterionAllTest {
             assertEquals("aa", criterion.getName());
             assertEquals("aa: name contains \"Main\"", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -53,9 +53,9 @@ public class CriterionAllTest {
             assertEquals("bb", criterion.getName());
             assertEquals("bb: type equals \"java\"", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -85,9 +85,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size > 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -103,9 +103,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size < 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -121,9 +121,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size >= 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -139,9 +139,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size <= 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -157,9 +157,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size == 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -175,9 +175,9 @@ public class CriterionAllTest {
             assertEquals("cc", criterion.getName());
             assertEquals("cc: size != 60", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(0, criterion.getDependencies().length);
 
@@ -187,16 +187,45 @@ public class CriterionAllTest {
     }
 
     @Test
+    public void testGetSizeCriterion7() {
+        try {
+            Criterion criterion1 = new SizeCriterion("cc", "<", 60);
+            Criterion criterion2 = new SizeCriterion("cc", ">", 60);
+            Criterion criterion3 = new SizeCriterion("cc", "<=", 60);
+            Criterion criterion4 = new SizeCriterion("cc", ">=", 60);
+            Criterion criterion5 = new SizeCriterion("cc", "==", 60);
+            Criterion criterion6 = new SizeCriterion("cc", "!=", 60);
+            Criterion criterion7 = new SizeCriterion("cc", "?t?", 60);
+
+            Directory directory = new Directory("Main", new Directory(true));
+            assertTrue(criterion1.check(directory));
+            assertFalse(criterion2.check(directory));
+            assertTrue(criterion3.check(directory));
+            assertFalse(criterion4.check(directory));
+            assertFalse(criterion5.check(directory));
+            assertTrue(criterion6.check(directory));
+            assertFalse(criterion7.check(directory));
+        } catch (InvalidCriterionParameterException | CannotInitializeFileException ignored) {}
+    }
+
+    @Test
     public void testInvalidSizeCriterion1() {
         try {
-            assertEquals("cc: size > 60", criterionFactory.createSimpleCriterion("cc", "size", "<>", "60").toString());
+            assertNull(criterionFactory.createSimpleCriterion("cc", "size", "<>", "60").toString());
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
     @Test
     public void testInvalidSizeCriterion2() {
         try {
-            assertEquals("cc: size > 60", criterionFactory.createSimpleCriterion("cc", "size", "<>", "not_a_number").toString());
+            assertNull(criterionFactory.createSimpleCriterion("cc", "size", "<>", "not_a_number").toString());
+        } catch (InvalidCriterionParameterException ignored) {}
+    }
+
+    @Test
+    public void testInvalidCriterion() {
+        try {
+            assertNull(criterionFactory.createSimpleCriterion("cc", "invalidAttr", "<>", "not_a_number"));
         } catch (InvalidCriterionParameterException ignored) {}
     }
 
@@ -206,9 +235,9 @@ public class CriterionAllTest {
         assertEquals("IsDocument", criterion.getName());
         assertEquals("IsDocument", criterion.toString());
 
-        criterion.increaseReferenceCount();
+        criterion.__INTERNAL__increaseReferenceCount();
         assertEquals(1, criterion.getReferenceCount());
-        criterion.decreaseReferenceCount();
+        criterion.__INTERNAL__decreaseReferenceCount();
         assertEquals(0, criterion.getReferenceCount());
         assertEquals(0, criterion.getDependencies().length);
 
@@ -226,12 +255,15 @@ public class CriterionAllTest {
             assertEquals("dd", criterion.getName());
             assertEquals("dd: !cc", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(1, criterion.getDependencies().length);
-        } catch (InvalidCriterionParameterException ignored) {}
+
+            Directory directory = new Directory("Main", new Directory(true));
+            assertTrue(criterion.check(directory));
+        } catch (InvalidCriterionParameterException | CannotInitializeFileException ignored) {}
     }
 
     @Test
@@ -261,9 +293,9 @@ public class CriterionAllTest {
             assertEquals("hh", criterion.getName());
             assertEquals("hh: cc && gg", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(2, criterion.getDependencies().length);
 
@@ -281,9 +313,9 @@ public class CriterionAllTest {
             assertEquals("kk", criterion.getName());
             assertEquals("kk: cc || gg", criterion.toString());
 
-            criterion.increaseReferenceCount();
+            criterion.__INTERNAL__increaseReferenceCount();
             assertEquals(1, criterion.getReferenceCount());
-            criterion.decreaseReferenceCount();
+            criterion.__INTERNAL__decreaseReferenceCount();
             assertEquals(0, criterion.getReferenceCount());
             assertEquals(2, criterion.getDependencies().length);
 
