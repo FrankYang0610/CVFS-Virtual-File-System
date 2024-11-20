@@ -59,7 +59,7 @@ public final class PutBackCri implements FileUnrelatedUndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new RemoveCri(fs, criterion, type.getInverseType());
     }
 }

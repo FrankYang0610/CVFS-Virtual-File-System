@@ -13,6 +13,6 @@ public class VDiskOutOfSpaceException extends ModelException {
      * @param vDiskFreeSpace the free space of the virtual disk. 
      */
     public VDiskOutOfSpaceException(long fileSize, long vDiskFreeSpace) {
-        super("VDisk out of space to save the document: " + fileSize + " out of " + vDiskFreeSpace + ".");
+        super("Virtual disk out of space to save the file: " + fileSize + " out of " + vDiskFreeSpace + ".");
     }
 }

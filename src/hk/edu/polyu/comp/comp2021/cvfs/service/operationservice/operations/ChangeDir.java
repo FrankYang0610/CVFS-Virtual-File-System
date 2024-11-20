@@ -130,7 +130,7 @@ public final class ChangeDir implements UndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new ChangeDir(fs, newDirectory, originalDirectory, type.getInverseType());
     }
 }

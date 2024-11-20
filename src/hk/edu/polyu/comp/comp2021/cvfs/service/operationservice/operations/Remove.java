@@ -94,7 +94,7 @@ public final class Remove implements UndoableOperation {
      * The undo operation of the {@code Remove} is {@code PutBack}.
      */
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new PutBack(fs, file, type.getInverseType());
     }
 }

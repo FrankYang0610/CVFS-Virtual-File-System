@@ -7,7 +7,7 @@ import java.util.Stack;
 
 /**
  * <h3>The {@code OperationRecord} Class</h3>
- * This class is used to record the executed processes, helping potential undo and redo operations.
+ * This class is used to record the executed operations, helping potential undoes and redoes.
  *
  * @implNote Two stacks are used to record executed operations. If an operation is neither an undo nor a redo (called 'regular' in {@code OperationType} enum), it is pushed into the {@code undo} stack after execution, and the {@code redo} stack is cleared. For an undo operation, the operation at the top of the {@code undo} stack is popped and its inverse operation shall be executed. The inverse operation will be pushed into the {@code redo} stack then. For a redo operation, the operation at the top of the {@code redo} stack is popped and its inverse operation shall be executed. The inverse operation will then be pushed into the {@code undo} stack then, and the redo stack will not be cleared.
  */

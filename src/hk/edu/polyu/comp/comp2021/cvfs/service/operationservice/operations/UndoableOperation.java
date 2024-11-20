@@ -21,10 +21,10 @@ public interface UndoableOperation extends Operation {
     public boolean isRedoOperation();
 
     /**
-     * Get the corresponding undo operation, i.e., the inverse operation.
+     * Get the corresponding inverse operation, i.e., the undo operation.
      * <p>
      * It should be guaranteed that this method shall never be invoked before the {@code exec()} method is invoked.
      * @return the {@code Operation} object that refers to the inverse operation of the current operation.
      */
-    public Operation getUndoOperation();
+    public Operation getInverseOperation();
 }

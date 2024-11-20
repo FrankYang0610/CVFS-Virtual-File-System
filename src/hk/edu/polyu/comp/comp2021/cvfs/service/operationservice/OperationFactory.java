@@ -71,9 +71,9 @@ public final class OperationFactory {
             case "loadCri": // [BON1]
                 return new LoadCri(fs, operationRecord, command);
             case "undo": // [BON2]
-                return operationRecord.popForUndo().getUndoOperation();
+                return operationRecord.popForUndo().getInverseOperation();
             case "redo": // [BON2]
-                return operationRecord.popForRedo().getUndoOperation();
+                return operationRecord.popForRedo().getInverseOperation();
             // case "reset": // obsoleted, since ejectVDisk() is no longer supported.
             //     return new Reset(fs, operationRecord, command);
             case "quit": // [REQ17]

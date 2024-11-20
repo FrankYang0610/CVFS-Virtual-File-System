@@ -76,7 +76,7 @@ public final class NewSimpleCri implements FileUnrelatedUndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new RemoveCri(fs, criterion, OperationType.UNDO);
     }
 }

@@ -314,12 +314,14 @@ public final class FileSystem {
      * Check if the file still exists in its parent directory, i.e., if the file has been deleted.
      * @param file the file to check.
      * @throws FileNotExistsException if the file no longer exists in its parent directory.
+     * @implNote This method is one of the most important part to make our system safe. A wonderful {@code file.getParent().getFiles().get(file.getName()) != file} logic also make this method safer. Then there is no need to check the existence in {@code Directory} methods, which is also a part of high-fidelity simulation - not to let entities be responsible for too much file system tasks.
      */
     private void checkExistence(File file) throws FileNotExistsException {
         // It is unable to check the existence of a file when its parent is null.
         // For the root directories, we assume they always exists.
         if (file.__INTERNAL__getParent() != null) {
-            if (!((Directory)(file.__INTERNAL__getParent())).__MODEL_INTERNAL__getFiles().containsValue(file)) {
+            // A fast and safe strategy.
+            if (((Directory)(file.__INTERNAL__getParent())).__MODEL_INTERNAL__getFiles().get(file.getName()) != file) {
                 throw new FileNotExistsException(file.getFullname());
             }
         }

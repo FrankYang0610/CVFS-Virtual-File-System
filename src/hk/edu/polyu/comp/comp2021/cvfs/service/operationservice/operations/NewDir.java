@@ -76,7 +76,7 @@ public final class NewDir implements UndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new Remove(fs, directory, OperationType.UNDO);
     }
 }

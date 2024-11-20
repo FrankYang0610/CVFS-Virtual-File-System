@@ -97,7 +97,7 @@ public final class ModifyContent implements UndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new ModifyContent(fs, file, oldContent, type.getInverseType());
     }
 }

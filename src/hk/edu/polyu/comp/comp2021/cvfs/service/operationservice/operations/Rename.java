@@ -98,7 +98,7 @@ public final class Rename implements UndoableOperation {
      * The undo operation of the {@code Rename} is itself.
      */
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new Rename(fs, file, newName, originalName, type.getInverseType());
     }
 }

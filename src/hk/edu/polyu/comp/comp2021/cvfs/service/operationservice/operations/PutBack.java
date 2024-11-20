@@ -64,7 +64,7 @@ public final class PutBack implements UndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new Remove(fs, file, type.getInverseType());
     }
 }

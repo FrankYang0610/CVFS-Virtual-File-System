@@ -91,7 +91,7 @@ public final class NewDoc implements UndoableOperation {
     }
 
     @Override
-    public Operation getUndoOperation() {
+    public Operation getInverseOperation() {
         return new Remove(fs, document, OperationType.UNDO);
     }
 }
